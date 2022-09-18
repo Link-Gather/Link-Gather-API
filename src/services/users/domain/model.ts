@@ -3,7 +3,7 @@ import { customAlphabet } from 'nanoid';
 import { Field, ID, ObjectType } from 'type-graphql';
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 
-const providedByType = <const>['kakao', 'local'];
+export const providedByType = <const>['kakao', 'local'];
 export type ProvidedByType = typeof providedByType[number];
 
 export type UserCtorType = {
