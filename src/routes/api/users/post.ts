@@ -10,7 +10,7 @@ const bodySchema = Joi.object({
 });
 
 export default {
-  path: '/api/users',
+  path: '/users',
   method: 'post',
   validate: {
     type: 'json',

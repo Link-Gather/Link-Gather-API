@@ -44,7 +44,7 @@ export class User extends Aggregate<User> {
       this.email = args.email;
       this.name = args.name;
       this.password = args.password;
-      this.providedBy = args.providedBy;
+      this.providedBy = args.providedBy ?? 'local';
     }
   }
 
