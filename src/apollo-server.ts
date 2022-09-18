@@ -1,7 +1,7 @@
 // import * as Koa from 'koa'
 // import { ApolloServer } from 'apollo-server-koa'
 // import { buildSchema, ResolverData } from 'type-graphql'
-// import { formatError } from './libs/apollo-server'
+// import { formatError } from './lib/apollo-server'
 
 // export default async () => {
 //   /**

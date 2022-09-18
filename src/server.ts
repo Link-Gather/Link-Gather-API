@@ -4,7 +4,8 @@ import * as Koa from 'koa';
 import * as koaBody from 'koa-body';
 import * as gracefulShutdown from 'http-graceful-shutdown';
 import { globalRouter } from './routes/api';
-import { db } from './libs/typeorm';
+import { db } from './lib/typeorm';
+import { errorHandlerMiddleware, nanoidMiddleware, dependencyInjectorMiddleware } from './middlewares';
 // import apolloServer from './apollo-server'
 
 (async () => {
@@ -20,6 +21,9 @@ import { db } from './libs/typeorm';
   /**
    * Route middleware
    */
+  app.use(nanoidMiddleware);
+  app.use(errorHandlerMiddleware);
+  app.use(dependencyInjectorMiddleware);
   app.use(globalRouter.middleware());
   // await graphqlServer.start()
   // app.use(graphqlServer.getMiddleware()) // path: /graphql
