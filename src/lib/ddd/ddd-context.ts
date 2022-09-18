@@ -25,7 +25,7 @@ export class DddContext {
     const container = Container.of(containerId);
     container.set(DddContext, this);
 
-    this.get = (type) => container.get(type as any); // TODO: overload 문제 해결 후 any 제거
+    this.get = (type) => container.get(type);
 
     this.set = (type, instance) => container.set(type, instance);
   }
