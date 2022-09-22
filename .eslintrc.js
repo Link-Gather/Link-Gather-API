@@ -51,10 +51,7 @@ module.exports = {
     /**
      * For test files
      */
-    'import/no-extraneous-dependencies': [
-      'error',
-      { devDependencies: ['**/*.*spec.*s', '**/*.*test.*s'] },
-    ],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.*spec.*s', '**/*.*test.*s'] }],
 
     /**
      * Overridden in `typescript.js` rules
