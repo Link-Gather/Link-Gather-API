@@ -9,10 +9,10 @@ const mysqlConfig = {
 
 export default {
   ...mysqlConfig,
-  synchronize: true,
-  dropSchema: true,
+  // synchronize: true,
+  // dropSchema: true,
   logging: true,
-  // migrations: ['src/migration/**/*.ts'],
+  migrations: ['src/migration/**/*.ts'],
   supportBigNumbers: true,
   bigNumberStrings: false,
 };
