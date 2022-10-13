@@ -1,18 +1,17 @@
 const mysqlConfig = {
   type: 'mysql',
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_NAME,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  host: { $env: 'DB_HOST' },
+  port: { $env: 'DB_PORT' },
+  database: { $env: 'DB_NAME' },
+  username: { $env: 'DB_USER' },
+  password: { $env: 'DB_PASSWORD' },
 };
 
 export default {
   ...mysqlConfig,
-  // synchronize: true,
-  // dropSchema: true,
+  synchronize: false,
   logging: true,
-  migrations: ['src/migration/**/*.ts'],
+  // migrations: ['src/migration/**/*.ts'],
   supportBigNumbers: true,
   bigNumberStrings: false,
 };
