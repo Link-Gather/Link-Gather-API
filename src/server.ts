@@ -6,7 +6,7 @@ import * as gracefulShutdown from 'http-graceful-shutdown';
 import { globalRouter } from './routes/api';
 import { db } from './lib/typeorm';
 import { errorHandlerMiddleware, nanoidMiddleware, dependencyInjectorMiddleware } from './middlewares';
-// import apolloServer from './apollo-server'
+import apolloServer from './apollo-server'
 
 (async () => {
   /**
@@ -14,7 +14,7 @@ import { errorHandlerMiddleware, nanoidMiddleware, dependencyInjectorMiddleware 
    */
   db.initialize().then(() => console.log('DB Connected'));
   const app = new Koa();
-  // const graphqlServer = await apolloServer()
+  const graphqlServer = await apolloServer()
 
   app.use(koaBody({ multipart: true, jsonLimit: 10 * 1024 * 1024 })); // 10MB
 
@@ -25,8 +25,8 @@ import { errorHandlerMiddleware, nanoidMiddleware, dependencyInjectorMiddleware 
   app.use(errorHandlerMiddleware);
   app.use(dependencyInjectorMiddleware);
   app.use(globalRouter.middleware());
-  // await graphqlServer.start()
-  // app.use(graphqlServer.getMiddleware()) // path: /graphql
+  await graphqlServer.start()
+  app.use(graphqlServer.getMiddleware()) // path: /graphql
 
   const server = app.listen(3000);
 

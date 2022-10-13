@@ -37,9 +37,9 @@ export default {
     const { context } = ctx.state as { context: DddContext };
 
     const userService = context.get(UserService);
-    const body = ctx.request.body!;
+    const body  = ctx.request.body! as {email:string,name:string,password:string};
 
-    const params: Parameters<UserService['register']> = [body];
+    const params: Parameters<UserService['register']> = [{...body,providedBy:'local'}];
 
     const account = await userService.register(...params);
 
