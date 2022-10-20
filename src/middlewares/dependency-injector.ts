@@ -15,17 +15,15 @@ export const dependencyInjectorMiddleware = async (ctx: Context, next: () => Pro
 
     ctx.state.context = context;
 
-    // TODO: code below is deprecated
     ctx.state.container = container;
     container.set(DddContext, context);
-    container.set(EntityManager, db.manager); //TODO: getManager 대체할 방법
+    container.set(EntityManager, db.manager);
     container.set('txId', txId);
     await next();
   } finally {
     if (context) {
       context.dispose();
     }
-    // TODO: code below is deprecated
     Container.reset(txId);
   }
 };

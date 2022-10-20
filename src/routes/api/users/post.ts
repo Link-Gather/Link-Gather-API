@@ -41,6 +41,7 @@ export default {
 
     const params: Parameters<UserService['register']> = [{...body,providedBy:'local'}];
 
+    //FIXME: extractType이 Joi에 없다...
     const account = await userService.register(...params);
 
     ctx.body = {
