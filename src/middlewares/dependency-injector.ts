@@ -17,7 +17,6 @@ export const dependencyInjectorMiddleware = async (ctx: Context, next: () => Pro
 
     ctx.state.container = container;
     container.set(DddContext, context);
-    container.set(EntityManager, db.manager);
     container.set('txId', txId);
     await next();
   } finally {
