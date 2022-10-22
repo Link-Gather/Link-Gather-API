@@ -6,22 +6,14 @@ import { db } from '../lib/typeorm';
 
 export const dependencyInjectorMiddleware = async (ctx: Context, next: () => Promise<any>) => {
   const { txId } = ctx.state;
-  let context;
+  const context = new DddContext(txId);
+  context.set(EntityManager, db.manager);
 
+  ctx.state.context = context;
+  
   try {
-    context = new DddContext(txId);
-    context.set(EntityManager, db.manager);
-
-    ctx.state.context = context;
-
-    ctx.state.container = context.container;
-    context.container.set(DddContext, context);
-    context.container.set('txId', txId);
     await next();
   } finally {
-    if (context) {
       context.dispose();
-    }
-    Container.reset(txId);
   }
 };
