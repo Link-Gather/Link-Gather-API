@@ -1,5 +1,5 @@
 import { customAlphabet } from 'nanoid';
-import { Container, Token } from 'typedi';
+import { Container, ContainerInstance, Token } from 'typedi';
 import { EntityManager } from 'typeorm';
 
 type ClassType<T> = new (...args: any[]) => T;
@@ -13,6 +13,8 @@ export class DddContext {
 
   dispose: () => void;
 
+  container!: ContainerInstance;
+
   constructor(txId: string) {
     this._txId = txId;
 
@@ -22,12 +24,12 @@ export class DddContext {
       Container.reset(containerId);
     };
 
-    const container = Container.of(containerId);
-    container.set(DddContext, this);
+    this.container = Container.of(containerId);
+    this.container.set(DddContext, this);
 
-    this.get = (type) => container.get(type);
+    this.get = (type) => this.container.get(type);
 
-    this.set = (type, instance) => container.set(type, instance);
+    this.set = (type, instance) => this.container.set(type, instance);
   }
 
   get txId(): string {

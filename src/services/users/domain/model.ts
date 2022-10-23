@@ -10,7 +10,7 @@ export type UserCtorType = {
   name: string;
   password: string;
   email: string;
-  providedBy: ProvidedByType;
+  providedBy?: ProvidedByType;
 };
 
 const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 15);

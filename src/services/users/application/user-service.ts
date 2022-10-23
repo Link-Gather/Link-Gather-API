@@ -1,4 +1,4 @@
-import { DddService } from '../../../lib/ddd';
+import { DddService, Transactional } from '../../../lib/ddd';
 import { Inject, Service } from 'typedi';
 import { UserRepository } from '../infrastructure/repository';
 import { ProvidedByType, User } from '../domain/model';
@@ -16,6 +16,7 @@ export class UserService extends DddService {
   @Inject()
   private userRepository!: UserRepository;
 
+  @Transactional()
   async register(args: UserInputType): Promise<User> {
     const user = User.of(args);
     await this.userRepository.save([user]);

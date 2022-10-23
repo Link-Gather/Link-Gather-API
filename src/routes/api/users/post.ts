@@ -41,7 +41,7 @@ export default {
 
     const params: Parameters<UserService['register']> = [{...body,providedBy:'local'}];
 
-    const account = await userService.register(...params);
+    const account:Joi.extractType<typeof outputSchema> = await userService.register(...params);
 
     ctx.body = {
       data: account,
